@@ -2,4 +2,13 @@
   Copyright (c) 2015, 2019, Oracle and/or its affiliates.
   The Universal Permissive License (UPL), Version 1.0
 -->
-<p data-bind="text:messageText"></p>
+<div class="oj-panel oj-panel-alt1">
+  <oj-text-area id="text-area" value="{{code}}" disabled="[[loading]]" autofocus required>
+  </oj-text-area>
+  <oj-button class="oj-margin oj-button-primary" on-oj-action="[[execute]]" disabled="[[loading]]">
+    Execute
+  </oj-button>
+</div>
+<oj-bind-if test="[[loading]]">
+  <oj-progress class="oj-margin" type="circle" value="-1"></oj-progress>
+</oj-bind-if>

@@ -78,8 +78,15 @@
       </header>
       <div
         role="main"
-        class="oj-web-applayout-max-width oj-web-applayout-content"
-      ></div>
+        class="oj-web-applayout-max-width oj-web-applayout-content center"
+      >
+        <h1>
+          <oj-bind-text value="[[appName]]"></oj-bind-text>
+        </h1>
+        <div class="oj-margin">
+          <interpreter-cell></interpreter-cell>
+        </div>
+      </div>
       <footer class="oj-web-applayout-footer" role="contentinfo">
         <div
           class="oj-web-applayout-footer-item oj-web-applayout-max-width oj-text-secondary-color oj-text-sm"

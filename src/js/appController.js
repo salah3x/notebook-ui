@@ -10,7 +10,8 @@ define([
   'ojs/ojresponsiveutils',
   'ojs/ojresponsiveknockoututils',
   'knockout',
-  'ojs/ojknockout'
+  'ojs/ojknockout',
+  'jet-composites/interpreter-cell/0.0.1/loader'
 ], function(ResponsiveUtils, ResponsiveKnockoutUtils, ko) {
   function ControllerViewModel() {
     var self = this;
