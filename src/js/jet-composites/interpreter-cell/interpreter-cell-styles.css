@@ -1,0 +1,8 @@
+interpreter-cell:not(.oj-complete) {
+  visibility: hidden;
+}
+
+interpreter-cell {
+  min-height: 50px;
+  width: 50px;
+}

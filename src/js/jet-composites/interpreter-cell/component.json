@@ -1,0 +1,11 @@
+{
+  "name": "interpreter-cell",
+  "version": "0.0.1",
+  "jetVersion": "^7.2.0",
+  "displayName": "Notebook cell",
+  "description": "An input+output section that represent an command line runner.",
+  "properties": {},
+  "methods": {},
+  "events": {},
+  "slots": {}
+}
