@@ -7,6 +7,7 @@
     "email": "salah.loukili@gmail.com",
     "url": "https://github.com/salah3x"
   },
+  "license": "GPL-v3",
   "dependencies": {
     "@oracle/oraclejet": "~7.2.0"
   },
