@@ -2,10 +2,26 @@
   Copyright (c) 2015, 2019, Oracle and/or its affiliates.
   The Universal Permissive License (UPL), Version 1.0
 -->
+<oj-messages
+  messages="[[messagesDataprovider]]"
+  position="{}"
+  display="general"
+>
+</oj-messages>
 <div class="oj-panel oj-panel-alt1">
-  <oj-text-area id="text-area" value="{{code}}" disabled="[[loading]]" autofocus required>
+  <oj-text-area
+    id="text-area"
+    value="{{ code }}"
+    disabled="[[loading]]"
+    autofocus
+    required
+  >
   </oj-text-area>
-  <oj-button class="oj-margin oj-button-primary" on-oj-action="[[execute]]" disabled="[[loading]]">
+  <oj-button
+    class="oj-margin oj-button-primary"
+    data-bind="click: execute"
+    disabled="[[loading]]"
+  >
     Execute
   </oj-button>
 </div>

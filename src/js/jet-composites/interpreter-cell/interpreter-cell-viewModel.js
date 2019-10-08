@@ -7,10 +7,12 @@ define([
   'knockout',
   'jquery',
   'ojL10n!./resources/nls/interpreter-cell-strings',
+  'ojs/ojarraydataprovider',
   'ojs/ojinputtext',
   'ojs/ojbutton',
-  'ojs/ojprogress'
-], function(ko, $, componentStrings) {
+  'ojs/ojprogress',
+  'ojs/ojmessages'
+], function(ko, $, componentStrings, ArrayDataProvider) {
   function ExampleComponentModel(context) {
     var self = this;
 
@@ -31,31 +33,54 @@ define([
 
     // The state of the request
     self.loading = ko.observable(false);
-    
+
+    // The excution result
+    self.result = ko.observable({});
+
+    // The error message
+    self.errors = ko.observableArray([]);
+    self.messagesDataprovider = new ArrayDataProvider(self.errors);
+
     // Click handler
     self.execute = () => {
       if ($('#text-area')[0].valid !== 'valid') {
         return;
       }
-      self.loading(true)
+      self.loading(true);
       $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/execute",
-        contentType: "application/json",
+        type: 'POST',
+        url: 'http://localhost:8080/execute',
+        contentType: 'application/json',
         data: JSON.stringify({
-          code : self.code()
+          code: self.code()
         }),
         success: data => {
-          self.loading(false)
-          console.log(data)
+          self.loading(false);
+          console.log(data);
         },
         error: err => {
-          self.loading(false)
-          let errMessage =  err.status == 0 ? 'Connection failed': err.responseJSON.message
-          console.error(errMessage);
+          self.loading(false);
+          let errMessage =
+            err.status == 0 ? 'Connection failed' : err.responseJSON.message;
+          self.errors.push({
+            severity:
+              err.status >= 500 || err.status == 0
+                ? 'error'
+                : err.status >= 400
+                ? 'warning'
+                : 'info',
+            summary:
+              err.status >= 500 || err.status == 0
+                ? 'Server Error'
+                : err.status >= 400
+                ? 'Bad Request'
+                : 'Error',
+            detail: errMessage,
+            autoTimeout: 5000
+          });
         }
       });
-    }
+    };
 
     // Example for parsing context properties
     // if (context.properties.name) {
