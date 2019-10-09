@@ -31,6 +31,19 @@ define([
       '%js\nvar data = "SeriesA\\tSeriesB\\tSeriesC\\n1\\t2\\t3\\n4\\t5\\t6"\ndata'
     );
 
+    // Input validator
+    this.validators = ko.pureComputed(function() {
+      return [
+        {
+          type: 'regExp',
+          options: {
+            pattern: '%[a-zA-Z]+\\n[\\W\\w]+',
+            messageDetail: 'Example:\n%js\n1 + 1;\n"Hello ".concat("world!");'
+          }
+        }
+      ];
+    });
+
     // The state of the request
     self.loading = ko.observable(false);
 
@@ -66,6 +79,7 @@ define([
         },
         error: err => {
           self.loading(false);
+          self.result(null);
           let errMessage =
             err.status == 0 ? 'Connection failed' : err.responseJSON.message;
           self.errors.push({

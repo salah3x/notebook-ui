@@ -13,6 +13,8 @@
     id="text-area"
     value="{{ code }}"
     disabled="[[loading]]"
+    validators="[[validators]]"
+    resize-behavior="vertical"
     autofocus
     required
   >
@@ -34,6 +36,7 @@
       <oj-text-area
       class="oj-margin"
         value="[[result().result]]"
+        resize-behavior="vertical"
         readonly
       >
       </oj-text-area>
