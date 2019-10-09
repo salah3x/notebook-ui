@@ -8,7 +8,7 @@
   display="general"
 >
 </oj-messages>
-<div class="oj-panel oj-panel-alt1">
+<div class="oj-panel oj-panel-shadow-md">
   <oj-text-area
     id="text-area"
     value="{{ code }}"
@@ -24,7 +24,18 @@
   >
     Execute
   </oj-button>
+  <div>
+    <oj-bind-if test="[[loading]]">
+      <oj-progress class="oj-margin" type="circle" value="-1"></oj-progress>
+    </oj-bind-if>
+  </div>
+  <oj-bind-if test="[[result() && !loading()]]">
+    <div :class="[[classObs]]">
+      <oj-text-area
+      class="oj-margin"
+        value="[[result().result]]"
+        readonly
+      >
+      </oj-text-area>
+  </oj-bind-if>
 </div>
-<oj-bind-if test="[[loading]]">
-  <oj-progress class="oj-margin" type="circle" value="-1"></oj-progress>
-</oj-bind-if>

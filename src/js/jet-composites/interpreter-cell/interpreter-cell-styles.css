@@ -10,3 +10,11 @@ interpreter-cell {
 .oj-textarea {
   display: initial;
 }
+
+.oj-textarea-input {
+  height: 150px;
+}
+
+.oj-button {
+  margin-bottom: 10px;
+}

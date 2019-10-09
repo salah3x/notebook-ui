@@ -35,11 +35,12 @@ define([
     self.loading = ko.observable(false);
 
     // The excution result
-    self.result = ko.observable({});
+    self.result = ko.observable(null);
 
     // The error message
     self.errors = ko.observableArray([]);
     self.messagesDataprovider = new ArrayDataProvider(self.errors);
+    this.classObs = ko.observable();
 
     // Click handler
     self.execute = () => {
@@ -56,7 +57,12 @@ define([
         }),
         success: data => {
           self.loading(false);
-          console.log(data);
+          self.result(data);
+          this.classObs(
+            self.result().success
+              ? 'oj-panel oj-panel-alt1 oj-selected'
+              : 'oj-panel oj-panel-alt4 oj-selected'
+          );
         },
         error: err => {
           self.loading(false);
