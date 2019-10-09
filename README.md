@@ -7,6 +7,27 @@ An Interactive Notebook UI for [notebook-server](https://github.com/salah3x/note
 ## Pre-requisite
 
 - Run the notebook server on your machine (Follow the [installation instructions](https://github.com/salah3x/notebook-server#installation)).
+- Install the `Oracle JET cli`, assuming `node` and `npm` are already installed:
+
+  `$ npm install -g @oracle/ojet-cli`
+
+## Build-Run-Deploy
+
+- First clone the repo:
+
+  `$ git clone git@github.com:salah3x/notebook-ui.git && cd notebook-ui`
+
+- Serve the app on [http://localhost:8000/](http://localhost:8000/):
+
+  `$ ojet serve`
+
+- To deploy the app:
+
+  - Build the project:
+
+    `$ ojet build`
+
+  - Copy the content of `web` directory to a static web host (e.g. AWS S3 or Firebase Hosting)
 
 ## Further help
 
