@@ -29,6 +29,10 @@ An Interactive Notebook UI for [notebook-server](https://github.com/salah3x/note
 
   - Copy the content of `web` directory to a static web host (e.g. AWS S3 or Firebase Hosting)
 
+## Features
+
+See [release notes](https://github.com/salah3x/notebook-ui/releases)
+
 ## Further help
 
 To get more information about Oracle JET, check out the [the official docs](http://www.oraclejet.org).
