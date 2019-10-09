@@ -66,6 +66,9 @@ define([
     self.messagesDataprovider = new ArrayDataProvider(self.errors);
     self.classObs = ko.observable();
 
+    // Chart type
+    self.chartType = ko.observable('bar');
+
     // Click handler
     self.execute = () => {
       if ($('#text-area')[0].valid !== 'valid') {

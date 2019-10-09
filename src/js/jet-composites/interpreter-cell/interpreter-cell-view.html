@@ -41,8 +41,19 @@
       </oj-text-area>
       <oj-bind-if test="[[dataItems() && dataItems().length]]">
         <hr />
+        <oj-buttonset-one
+          value="{{ chartType }}"
+          aria-label="Choose only one chart."
+        >
+          <oj-option value="bar">
+            Bar
+          </oj-option>
+          <oj-option value="pie">
+            Pie
+          </oj-option>
+        </oj-buttonset-one>
         <oj-chart
-          type="bar"
+          type="[[chartType]]"
           data="[[dataProvider]]"
           animation-on-display="auto"
           animation-on-data-change="auto"
