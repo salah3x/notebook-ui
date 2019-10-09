@@ -34,7 +34,7 @@ define([
     );
 
     // Input validator
-    this.validators = ko.pureComputed(function() {
+    self.validators = ko.pureComputed(function() {
       return [
         {
           type: 'regExp',
@@ -54,11 +54,14 @@ define([
 
     // Parsed result
     self.dataItems = ko.observableArray(null);
+    self.dataProvider = new ArrayDataProvider(self.dataItems, {
+      keyAttributes: 'id'
+    });
 
     // The error message
     self.errors = ko.observableArray([]);
     self.messagesDataprovider = new ArrayDataProvider(self.errors);
-    this.classObs = ko.observable();
+    self.classObs = ko.observable();
 
     // Click handler
     self.execute = () => {
@@ -76,21 +79,26 @@ define([
         success: data => {
           self.loading(false);
           self.result(data);
-          this.classObs(
+          self.classObs(
             self.result().success
               ? 'oj-panel oj-panel-alt1'
               : 'oj-panel oj-panel-alt4'
           );
           // Parse data
+          if (!self.result().success) {
+            self.dataItems(null);
+            return;
+          }
           const rows = data.result.split('\n');
           const labels = rows.shift().split('\t');
           const dataItems = [];
-          for (const row of rows) {
+          for (const [j, row] of rows.entries()) {
             const items = row.split('\t');
             const dataItem = {};
             for (const [i, label] of labels.entries()) {
               dataItem[label] = +items[i];
             }
+            dataItem.id = j;
             dataItems.push(dataItem);
           }
           self.dataItems(dataItems);
