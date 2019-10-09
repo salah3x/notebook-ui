@@ -27,6 +27,9 @@ define([
     self.properties = context.properties;
     self.res = componentStrings['interpreter-cell'];
 
+    // Session Id
+    self.sessionId = ko.observable(null);
+
     // The input field
     self.code = ko.observable(
       '%js\nvar data = "SeriesA\\tSeriesB\\tSeriesC\\n1\\t2\\t3\\n4\\t5\\t6"\ndata'
@@ -74,16 +77,16 @@ define([
         url: 'http://localhost:8080/execute',
         contentType: 'application/json',
         data: JSON.stringify({
-          code: self.code()
+          code: self.code(),
+          sessionId: self.sessionId()
         }),
         success: data => {
           self.loading(false);
           self.result(data);
           self.classObs(
-            self.result().success
-              ? 'oj-panel oj-panel-alt1'
-              : 'oj-panel oj-panel-alt4'
+            data.success ? 'oj-panel oj-panel-alt1' : 'oj-panel oj-panel-alt4'
           );
+          if (data.sessionId) self.sessionId(data.sessionId);
           // Parse data
           if (!self.result().success) {
             self.dataItems(null);
