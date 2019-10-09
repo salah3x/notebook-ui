@@ -13,8 +13,20 @@ interpreter-cell {
 
 .oj-textarea-input {
   height: 100px;
+  padding: 20px;
+}
+
+.oj-textarea.oj-read-only .oj-textarea-input,
+.oj-textarea-nocomp[readonly] {
+  background-color: #ffffffb7;
+  padding: 20px;
 }
 
 .oj-button {
   margin-bottom: 10px;
+}
+
+hr {
+  border: solid darkgrey;
+  border-width: 1px 0 0;
 }

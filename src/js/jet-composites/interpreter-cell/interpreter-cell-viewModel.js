@@ -11,7 +11,8 @@ define([
   'ojs/ojinputtext',
   'ojs/ojbutton',
   'ojs/ojprogress',
-  'ojs/ojmessages'
+  'ojs/ojmessages',
+  'ojs/ojchart'
 ], function(ko, $, componentStrings, ArrayDataProvider) {
   function ExampleComponentModel(context) {
     var self = this;
@@ -29,6 +30,7 @@ define([
     // The input field
     self.code = ko.observable(
       '%js\nvar data = "SeriesA\\tSeriesB\\tSeriesC\\n1\\t2\\t3\\n4\\t5\\t6"\ndata'
+      // '%js\nconsole.log("SeriesA\\tSeriesB\\tSeriesC\\n1\\t2\\t3\\n4\\t5\\t6")'
     );
 
     // Input validator
@@ -49,6 +51,9 @@ define([
 
     // The excution result
     self.result = ko.observable(null);
+
+    // Parsed result
+    self.dataItems = ko.observableArray(null);
 
     // The error message
     self.errors = ko.observableArray([]);
@@ -73,14 +78,27 @@ define([
           self.result(data);
           this.classObs(
             self.result().success
-              ? 'oj-panel oj-panel-alt1 oj-selected'
-              : 'oj-panel oj-panel-alt4 oj-selected'
+              ? 'oj-panel oj-panel-alt1'
+              : 'oj-panel oj-panel-alt4'
           );
+          // Parse data
+          const rows = data.result.split('\n');
+          const labels = rows.shift().split('\t');
+          const dataItems = [];
+          for (const row of rows) {
+            const items = row.split('\t');
+            const dataItem = {};
+            for (const [i, label] of labels.entries()) {
+              dataItem[label] = +items[i];
+            }
+            dataItems.push(dataItem);
+          }
+          self.dataItems(dataItems);
         },
         error: err => {
           self.loading(false);
           self.result(null);
-          let errMessage =
+          const errMessage =
             err.status == 0 ? 'Connection failed' : err.responseJSON.message;
           self.errors.push({
             severity:

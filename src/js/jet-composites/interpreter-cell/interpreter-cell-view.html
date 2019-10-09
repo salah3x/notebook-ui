@@ -34,11 +34,11 @@
   <oj-bind-if test="[[result() && !loading()]]">
     <div :class="[[classObs]]">
       <oj-text-area
-      class="oj-margin"
         value="[[result().result]]"
         resize-behavior="vertical"
         readonly
       >
       </oj-text-area>
+    </div>
   </oj-bind-if>
 </div>
