@@ -32,8 +32,7 @@ define([
 
     // The input field
     self.code = ko.observable(
-      '%js\nvar data = "SeriesA\\tSeriesB\\tSeriesC\\n1\\t2\\t3\\n4\\t5\\t6"\ndata'
-      // '%js\nconsole.log("SeriesA\\tSeriesB\\tSeriesC\\n1\\t2\\t3\\n4\\t5\\t6")'
+      '%js\nconsole.log("SeriesA\\tSeriesB\\tSeriesC\\n1\\t2\\t3\\n4\\t5\\t6")'
     );
 
     // Input validator
@@ -43,7 +42,8 @@ define([
           type: 'regExp',
           options: {
             pattern: '%[a-zA-Z]+\\n[\\W\\w]+',
-            messageDetail: 'Example:\n%js\n1 + 1;\n"Hello ".concat("world!");'
+            messageDetail:
+              'Example: %js<LINE BREAK>console.log("Hello world!"); ...'
           }
         }
       ];
@@ -55,9 +55,15 @@ define([
     // The excution result
     self.result = ko.observable(null);
 
-    // Parsed result
-    self.dataItems = ko.observableArray(null);
-    self.dataProvider = new ArrayDataProvider(self.dataItems, {
+    // Parsed result data (Converted to the appropiate format and pushed to ChartData when chart type change)
+    self.parsedResult = null;
+
+    // Chart type
+    self.chartType = ko.observable('bar');
+
+    // Chart data
+    self.chartData = ko.observableArray(null);
+    self.dataProvider = new ArrayDataProvider(self.chartData, {
       keyAttributes: 'id'
     });
 
@@ -66,14 +72,9 @@ define([
     self.messagesDataprovider = new ArrayDataProvider(self.errors);
     self.classObs = ko.observable();
 
-    // Chart type
-    self.chartType = ko.observable('bar');
-
     // Click handler
     self.execute = () => {
-      if ($('#text-area')[0].valid !== 'valid') {
-        return;
-      }
+      if ($('#text-area')[0].valid !== 'valid') return;
       self.loading(true);
       $.ajax({
         type: 'POST',
@@ -89,25 +90,31 @@ define([
           self.classObs(
             data.success ? 'oj-panel oj-panel-alt1' : 'oj-panel oj-panel-alt4'
           );
+          self.chartType('bar');
           if (data.sessionId) self.sessionId(data.sessionId);
-          // Parse data
           if (!self.result().success) {
             self.dataItems(null);
             return;
           }
-          const rows = data.result.split('\n');
-          const labels = rows.shift().split('\t');
+          // Parse data
+          const rows = data.result.trim().split('\n');
+          const series = rows.shift().split('\t');
           const dataItems = [];
+          let id = 0;
           for (const [j, row] of rows.entries()) {
             const items = row.split('\t');
-            const dataItem = {};
-            for (const [i, label] of labels.entries()) {
-              dataItem[label] = +items[i];
+            for (const [i, serie] of series.entries()) {
+              const dataItem = {};
+              dataItem.serie = serie;
+              dataItem.group = j + 1;
+              dataItem.value = +items[i] ? +items[i] : 0;
+              dataItem.id = ++id;
+              dataItems.push(dataItem);
             }
-            dataItem.id = j;
-            dataItems.push(dataItem);
           }
-          self.dataItems(dataItems);
+          self.parsedResult = dataItems;
+          // Send data to the chart
+          self.chartData(dataItems);
         },
         error: err => {
           self.loading(false);
@@ -133,6 +140,39 @@ define([
         }
       });
     };
+
+    // Chart type changed event handler (change data according to chart type)
+    self.chartType.subscribe(chart => {
+      if (chart === 'bar') self.chartData(self.parsedResult);
+      else if (chart === 'pie') {
+        let data = [];
+        for (let item of this.parsedResult) {
+          let d = data.find(i => i.serie === item.serie);
+          if (d) d.value += item.value;
+          else data.push({ ...item });
+        }
+        self.chartData(data);
+      } else if (chart === 'scatter') {
+        let data = [];
+        let size = self.parsedResult.filter(i => i.group === 1).length;
+        for (let i = 0; i < self.parsedResult.length; i += size * 2) {
+          for (let j = 0; j < size; j++) {
+            let d = {
+              ...self.parsedResult[i + j],
+              x: self.parsedResult[i + j].value,
+              y:
+                (self.parsedResult[size + i + j] &&
+                  self.parsedResult[size + i + j].value) ||
+                0,
+              group: parseInt(self.parsedResult[i].group / 2) + 1
+            };
+            delete d.value;
+            data.push(d);
+          }
+        }
+        self.chartData(data);
+      }
+    });
 
     // Example for parsing context properties
     // if (context.properties.name) {

@@ -39,7 +39,7 @@
         readonly
       >
       </oj-text-area>
-      <oj-bind-if test="[[dataItems() && dataItems().length]]">
+      <oj-bind-if test="[[chartData() && chartData().length]]">
         <hr />
         <oj-buttonset-one
           value="{{ chartType }}"
@@ -50,6 +50,9 @@
           </oj-option>
           <oj-option value="pie">
             Pie
+          </oj-option>
+          <oj-option value="scatter">
+            Scatter
           </oj-option>
         </oj-buttonset-one>
         <oj-chart
@@ -62,9 +65,11 @@
         >
           <template slot="itemTemplate" data-oj-as="item">
             <oj-chart-item
-              value="[[item.data.id]]"
-              group-id="[[ [item.data.id] ]]"
-              series-id="[[item.data.id]]"
+              value="[[item.data.value]]"
+              group-id="[[ [item.data.group] ]]"
+              series-id="[[item.data.serie]]"
+              x="[[item.data.x]]"
+              y="[[item.data.y]]"
             >
             </oj-chart-item>
           </template>
