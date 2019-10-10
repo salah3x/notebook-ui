@@ -2,6 +2,8 @@
 
 An Interactive Notebook UI for [notebook-server](https://github.com/salah3x/notebook-server).
 
+It executes pieces of code on a remote server, display the output and visualize the returned data if it is parseable.
+
 ---
 
 ## Pre-requisite
@@ -25,9 +27,9 @@ An Interactive Notebook UI for [notebook-server](https://github.com/salah3x/note
 
   - Build the project:
 
-    `$ ojet build`
+    `$ ojet build --release`
 
-  - Copy the content of `web` directory to a static web host (e.g. AWS S3 or Firebase Hosting)
+  - Copy the content of `web` directory to a static web host (e.g. AWS S3 or Firebase Hosting).
 
 ## Features
 
