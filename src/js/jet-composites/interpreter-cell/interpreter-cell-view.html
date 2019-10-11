@@ -39,7 +39,9 @@
         readonly
       >
       </oj-text-area>
-      <oj-bind-if test="[[chartData() && chartData().length]]">
+      <oj-bind-if
+        test="[[chartData() && chartData().length && result().success]]"
+      >
         <hr />
         <oj-buttonset-one
           value="{{ chartType }}"
