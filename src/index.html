@@ -84,7 +84,22 @@
           <oj-bind-text value="[[appName]]"></oj-bind-text>
         </h1>
         <div class="oj-margin">
-          <interpreter-cell></interpreter-cell>
+          <div data-bind="foreach: cells">
+            <oj-button
+              class="oj-button-sm demo-button-error"
+              data-bind="click: $parent.removeCell"
+              display="icons"
+            >
+              <span
+                slot="startIcon"
+                class="oj-fwk-icon oj-fwk-icon-cross"
+              ></span>
+            </oj-button>
+            <interpreter-cell></interpreter-cell>
+          </div>
+          <oj-button class="oj-margin" data-bind="click: addCell">
+            New cell
+          </oj-button>
         </div>
       </div>
       <footer class="oj-web-applayout-footer" role="contentinfo">

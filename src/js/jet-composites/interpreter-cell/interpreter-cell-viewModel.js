@@ -93,7 +93,7 @@ define([
           self.chartType('bar');
           if (data.sessionId) self.sessionId(data.sessionId);
           if (!self.result().success) {
-            self.dataItems(null);
+            self.chartData(null);
             return;
           }
           // Parse data

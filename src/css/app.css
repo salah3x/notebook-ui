@@ -8,3 +8,157 @@
 .center {
   text-align: center;
 }
+
+.oj-button-sm.oj-button {
+  margin: 0;
+  margin-top: 15px;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button-jqui.oj-default.oj-button-full-chrome,
+.demo-button-error.oj-buttonset
+  .oj-button-jqui.oj-focus-only.oj-button-full-chrome,
+.demo-button-error.oj-button-jqui.oj-default.oj-button-full-chrome,
+.demo-button-error.oj-button-jqui.oj-focus-only.oj-button-full-chrome,
+.demo-button-error.oj-button.oj-default.oj-button-full-chrome .oj-button-button,
+.demo-button-error.oj-button.oj-focus-only.oj-button-full-chrome
+  .oj-button-button {
+  background-color: #dd3333;
+  background-image: none;
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button.oj-default.oj-button-full-chrome
+  .oj-button-icon,
+.demo-button-error.oj-buttonset
+  .oj-button.oj-focus-only.oj-button-full-chrome
+  .oj-button-icon,
+.demo-button-error.oj-button.oj-default.oj-button-full-chrome .oj-button-icon,
+.demo-button-error.oj-button.oj-focus-only.oj-button-full-chrome
+  .oj-button-icon {
+  color: #ffffff;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button-jqui.oj-hover.oj-button-full-chrome:not(.oj-active),
+.demo-button-error.oj-button-jqui.oj-hover.oj-button-full-chrome:not(.oj-active),
+.demo-button-error.oj-button.oj-hover.oj-button-full-chrome:not(.oj-active)
+  .oj-button-button {
+  background-color: #f51b1b;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.15)
+  );
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button.oj-hover.oj-button-full-chrome:not(.oj-active)
+  .oj-button-icon,
+.demo-button-error.oj-button.oj-hover.oj-button-full-chrome:not(.oj-active)
+  .oj-button-icon {
+  color: #ffffff;
+}
+
+.demo-button-error.oj-buttonset .oj-button-jqui.oj-active.oj-button-full-chrome,
+.demo-button-error.oj-button-jqui.oj-active.oj-button-full-chrome,
+.demo-button-error.oj-button.oj-active.oj-button-full-chrome .oj-button-button {
+  background-color: #a81c1c;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button.oj-active.oj-button-full-chrome
+  .oj-button-icon,
+.demo-button-error.oj-button.oj-active.oj-button-full-chrome .oj-button-icon {
+  color: #ffffff;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button-jqui.oj-selected.oj-button-full-chrome:not(.oj-disabled),
+.demo-button-error.oj-button-jqui.oj-selected.oj-button-full-chrome:not(.oj-disabled),
+.demo-button-error.oj-button.oj-selected.oj-button-full-chrome:not(.oj-disabled)
+  .oj-button-button {
+  background-color: #a81c1c;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button-jqui.oj-selected.oj-hover.oj-button-full-chrome:not(.oj-disabled),
+.demo-button-error.oj-button-jqui.oj-selected.oj-hover.oj-button-full-chrome:not(.oj-disabled),
+.demo-button-error.oj-button.oj-selected.oj-hover.oj-button-full-chrome:not(.oj-disabled)
+  .oj-button-button {
+  background-color: #bd2020;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button.oj-selected.oj-button-full-chrome:not(.oj-disabled)
+  .oj-button-icon,
+.demo-button-error.oj-button.oj-selected.oj-button-full-chrome:not(.oj-disabled)
+  .oj-button-icon {
+  color: #ffffff;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button.oj-selected.oj-hover.oj-button-full-chrome:not(.oj-disabled)
+  .oj-button-icon,
+.demo-button-error.oj-button.oj-selected.oj-hover.oj-button-full-chrome:not(.oj-disabled)
+  .oj-button-icon {
+  color: #ffffff;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button-jqui.oj-disabled.oj-button-full-chrome,
+.demo-button-error.oj-button-jqui.oj-disabled.oj-button-full-chrome,
+.demo-button-error.oj-button.oj-disabled.oj-button-full-chrome
+  .oj-button-button {
+  background-color: #dd3333;
+  border-color: transparent;
+  color: #ffffff;
+  opacity: 0.4;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button.oj-disabled.oj-button-full-chrome
+  .oj-button-icon,
+.demo-button-error.oj-button.oj-disabled.oj-button-full-chrome .oj-button-icon {
+  color: #ffffff;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button-jqui.oj-disabled.oj-selected.oj-button-full-chrome,
+.demo-button-error.oj-button-jqui.oj-disabled.oj-selected.oj-button-full-chrome,
+.demo-button-error.oj-button.oj-disabled.oj-selected.oj-button-full-chrome
+  .oj-button-button {
+  color: #ffffff;
+  background-color: #a81c1c;
+  border-color: transparent;
+}
+
+.demo-button-error.oj-buttonset
+  .oj-button.oj-disabled.oj-selected.oj-button-full-chrome
+  .oj-button-icon,
+.demo-button-error.oj-button.oj-disabled.oj-selected.oj-button-full-chrome
+  .oj-button-icon {
+  color: #ffffff;
+}
